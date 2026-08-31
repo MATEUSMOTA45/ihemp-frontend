@@ -1,75 +1,85 @@
-# React + TypeScript + Vite
+# IHEMP Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend web do projeto **IHEMP**, desenvolvido com React, TypeScript e Vite.
 
-Currently, two official plugins are available:
+O projeto consome uma API própria desenvolvida em Node.js com Express e MongoDB.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Sobre o projeto
 
-## React Compiler
+O IHEMP é uma aplicação web inspirada em plataformas de delivery, com foco em cadastro de usuários, produtos, lojas, pedidos, autenticação e área administrativa.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+O objetivo do projeto é praticar e demonstrar conhecimentos de desenvolvimento Full Stack, integração entre frontend e backend, autenticação com JWT, consumo de API REST e organização de código.
 
-## Expanding the ESLint configuration
+## Tecnologias utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- TypeScript
+- Vite
+- React Router
+- Context API
+- Fetch API
+- JWT
+- CSS
+- Git
+- GitHub
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Funcionalidades
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Usuário
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Cadastro de usuário
+- Login
+- Autenticação com JWT
+- Perfil protegido
+- Logout
+- Visualização de produtos
+- Carrinho de compras
+- Validação de produtos por loja
+- Finalização de pedidos
+- Visualização dos próprios pedidos
 
-```
+### Área administrativa
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+- Listagem de usuários
+- Promoção de usuário para administrador
+- Cadastro de produtos
+- Edição de produtos
+- Exclusão de produtos
+- Cadastro de lojas
+- Edição de lojas
+- Exclusão de lojas
+- Visualização de pedidos
+- Atualização de status dos pedidos
+- Exclusão de pedidos
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Estrutura do projeto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+```text
+src/
+├── assets/
+├── components/
+│   ├── admin/
+│   │   ├── LojaAdmin.tsx
+│   │   ├── PedidoAdmin.tsx
+│   │   └── ProdutoAdmin.tsx
+│   ├── Navbar.tsx
+│   ├── RotaAdmin.tsx
+│   └── RotaProtegida.tsx
+│
+├── context/
+│   ├── AuthContext.tsx
+│   └── CarrinhoContext.tsx
+│
+├── pages/
+│   ├── Admin.tsx
+│   ├── Cadastro.tsx
+│   ├── Carrinho.tsx
+│   ├── Home.tsx
+│   ├── Login.tsx
+│   ├── MeusPedidos.tsx
+│   ├── Perfil.tsx
+│   └── Produtos.tsx
+│
+├── App.tsx
+├── index.css
+└── main.tsx
