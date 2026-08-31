@@ -1,0 +1,411 @@
+:root {
+  --verde-principal: #8fb070;
+  --verde-escuro: #416f47;
+  --bege-claro: #aea897;
+  --marrom-oliva: #716c59;
+  --quase-preto: #0b0b09;
+
+  --fundo: #0b0b09;
+  --fundo-card: #171712;
+  --fundo-input: #141410;
+
+  --texto: #f3f3ec;
+  --texto-secundario: #c8c6bb;
+
+  --borda: #716c59;
+
+  --perigo: #9f3b36;
+  --perigo-hover: #7e2f2b;
+}
+
+/* RESET */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* NAVBAR */
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 30px;
+  background: var(--quase-preto);
+  border-bottom: 1px solid var(--marrom-oliva);
+}
+
+nav a {
+  color: var(--texto);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: var(--verde-principal);
+}
+
+nav span {
+  margin-left: auto;
+  color: var(--bege-claro);
+  font-weight: 600;
+}
+
+nav button {
+  padding: 8px 14px;
+  border: 1px solid var(--verde-principal);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--texto);
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+nav button:hover {
+  background: var(--verde-principal);
+  color: var(--quase-preto);
+}
+
+/* CONTEÚDO GERAL */
+
+main {
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--texto);
+}
+
+p {
+  color: var(--texto-secundario);
+}
+
+/* ÁREA ADMIN */
+
+.admin-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.admin-container h1 {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.admin-container h2 {
+  margin-bottom: 20px;
+}
+
+/* ABAS */
+
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 10px 0 20px;
+  border-bottom: 1px solid var(--marrom-oliva);
+  flex-wrap: wrap;
+}
+
+.admin-tabs button {
+  padding: 10px 18px;
+  border: 1px solid var(--marrom-oliva);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  background: var(--fundo-card);
+  color: var(--texto);
+  transition: 0.2s;
+}
+
+.admin-tabs button:hover {
+  background: var(--verde-escuro);
+  border-color: var(--verde-escuro);
+  transform: translateY(-1px);
+}
+
+.admin-tabs button.ativo {
+  background: var(--verde-principal);
+  color: var(--quase-preto);
+  border-color: var(--verde-principal);
+}
+
+/* CARDS */
+
+.admin-card {
+  padding: 20px;
+  margin-bottom: 18px;
+  border: 1px solid var(--marrom-oliva);
+  border-radius: 12px;
+  background: var(--fundo-card);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+
+.admin-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--verde-escuro);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.admin-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.admin-card p {
+  margin: 8px 0;
+  color: var(--texto-secundario);
+}
+
+.admin-card strong {
+  color: var(--texto);
+}
+
+.admin-card + .admin-card {
+  margin-top: 12px;
+}
+
+/* BOTÕES ADMIN */
+
+.admin-button {
+  margin-top: 10px;
+  margin-right: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  background: var(--verde-principal);
+  color: var(--quase-preto);
+  transition: 0.2s;
+}
+
+.admin-button:hover {
+  background: var(--verde-escuro);
+  color: var(--texto);
+  transform: translateY(-1px);
+}
+
+.admin-button.danger {
+  background: var(--perigo);
+  color: white;
+}
+
+.admin-button.danger:hover {
+  background: var(--perigo-hover);
+}
+
+/* FORMULÁRIOS */
+
+.admin-container form {
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.admin-container label {
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.admin-container input,
+.admin-container select,
+.admin-container textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid var(--marrom-oliva);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--fundo-input);
+  color: var(--texto);
+  transition: 0.2s;
+}
+
+.admin-container input::placeholder,
+.admin-container textarea::placeholder {
+  color: #8f8a7d;
+}
+
+.admin-container input:focus,
+.admin-container select:focus,
+.admin-container textarea:focus {
+  outline: none;
+  border-color: var(--verde-principal);
+  box-shadow: 0 0 0 3px rgba(143, 176, 112, 0.18);
+}
+
+.admin-container select option {
+  background: var(--fundo-card);
+  color: var(--texto);
+}
+
+/* PEDIDOS */
+
+.pedido-itens {
+  margin-top: 20px;
+  padding: 15px;
+  background: #11110e;
+  border: 1px solid var(--marrom-oliva);
+  border-radius: 8px;
+}
+
+.pedido-itens h4 {
+  margin-top: 0;
+}
+
+.pedido-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(113, 108, 89, 0.55);
+}
+
+.pedido-item:last-child {
+  border-bottom: none;
+}
+
+.pedido-acoes {
+  margin-top: 20px;
+}
+
+.pedido-acoes label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.pedido-acoes select {
+  max-width: 250px;
+  margin-right: 10px;
+}
+
+/* STATUS DOS PEDIDOS */
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-badge.pendente {
+  background: #6f642c;
+  color: #fff4b8;
+}
+
+.status-badge.confirmado {
+  background: #3d5c72;
+  color: #e2f2ff;
+}
+
+.status-badge.preparando {
+  background: var(--marrom-oliva);
+  color: #fff8dc;
+}
+
+.status-badge.enviado {
+  background: #4a4d72;
+  color: #ececff;
+}
+
+.status-badge.entregue {
+  background: var(--verde-escuro);
+  color: #e7f8e5;
+}
+
+.status-badge.cancelado {
+  background: #713331;
+  color: #ffe4e2;
+}
+
+/* LINHAS */
+
+hr {
+  border: none;
+  border-top: 1px solid var(--marrom-oliva);
+  opacity: 0.5;
+  margin: 25px 0;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--quase-preto);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--marrom-oliva);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--verde-escuro);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    padding: 16px 20px;
+    gap: 12px;
+  }
+
+  nav span {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .admin-container {
+    padding: 20px;
+  }
+
+  .admin-tabs {
+    flex-direction: column;
+  }
+
+  .admin-tabs button {
+    width: 100%;
+  }
+
+  .pedido-acoes select {
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .admin-button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
