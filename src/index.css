@@ -1,21 +1,20 @@
 :root {
-  --verde-principal: #8fb070;
-  --verde-escuro: #416f47;
-  --bege-claro: #aea897;
-  --marrom-oliva: #716c59;
-  --quase-preto: #0b0b09;
+  --verde-principal: #4f9f70;
+  --verde-escuro: #2f6f4f;
 
-  --fundo: #0b0b09;
-  --fundo-card: #171712;
-  --fundo-input: #141410;
+  --quase-preto: #09110d;
 
-  --texto: #f3f3ec;
-  --texto-secundario: #c8c6bb;
+  --fundo: #0d1511;
+  --fundo-card: #132019;
+  --fundo-input: #0f1914;
 
-  --borda: #716c59;
+  --texto: #eef7f1;
+  --texto-secundario: #a9bdb0;
 
-  --perigo: #9f3b36;
-  --perigo-hover: #7e2f2b;
+  --borda: #294437;
+
+  --perigo: #c94f4f;
+  --perigo-hover: #a83f3f;
 }
 
 /* RESET */
@@ -31,7 +30,15 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Arial, sans-serif;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   background: var(--fundo);
   color: var(--texto);
 }
@@ -48,17 +55,17 @@ textarea {
 nav {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 8px;
 
   width: 100%;
 
-  padding: 16px 30px;
+  padding: 14px 28px;
 
-  background: var(--quase-preto);
+  background: #0f1a14;
 
-  border-bottom: 1px solid var(--marrom-oliva);
+  border-bottom: 1px solid var(--borda);
 
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
 
   position: sticky;
   top: 0;
@@ -66,13 +73,14 @@ nav {
 }
 
 nav a {
-  color: var(--texto);
+  color: var(--texto-secundario);
 
   text-decoration: none;
 
+  font-size: 14px;
   font-weight: 600;
 
-  padding: 8px 10px;
+  padding: 9px 11px;
 
   border-radius: 7px;
 
@@ -83,50 +91,53 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--quase-preto);
+  color: #eaf6ee;
 
-  background: var(--verde-principal);
+  background: rgba(79, 159, 112, 0.14);
 
   transform: translateY(-1px);
 }
 
 /* Nome do usuário logado */
+
 nav span {
   margin-left: auto;
 
-  color: var(--bege-claro);
+  color: #b5cbbc;
 
+  font-size: 14px;
   font-weight: 600;
 
   padding: 8px 10px;
 }
 
 /* Botão sair */
+
 nav button {
   padding: 8px 14px;
 
-  border: 1px solid var(--verde-principal);
+  border: 1px solid #365c48;
+  border-radius: 7px;
 
-  border-radius: 8px;
-
-  background: transparent;
+  background: #15231b;
 
   color: var(--texto);
 
   cursor: pointer;
 
+  font-size: 14px;
   font-weight: 600;
 
   transition:
     background 0.2s,
-    color 0.2s,
+    border-color 0.2s,
     transform 0.2s;
 }
 
 nav button:hover {
-  background: var(--verde-principal);
+  background: #1f3528;
 
-  color: var(--quase-preto);
+  border-color: var(--verde-principal);
 
   transform: translateY(-1px);
 }
@@ -135,15 +146,22 @@ nav button:hover {
 
 main {
   width: min(1100px, calc(100% - 32px));
+
   margin: 0 auto;
-  padding: 40px 0 60px;
+
+  padding: 48px 0 64px;
 }
 
 main > h1 {
   margin-top: 0;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
+
   text-align: center;
-  color: var(--verde-principal);
+
+  color: #eaf6ee;
+
+  font-size: 32px;
+  letter-spacing: -0.5px;
 }
 
 h1,
@@ -153,46 +171,84 @@ h4 {
   color: var(--texto);
 }
 
-p {
-  color: var(--texto-secundario);
-  line-height: 1.6;
+h2 {
+  font-size: 22px;
 }
 
-/* Cards das páginas normais */
+h3 {
+  font-size: 18px;
+}
+
+p {
+  color: var(--texto-secundario);
+
+  line-height: 1.65;
+}
+
+/* CARDS DAS PÁGINAS NORMAIS */
+
 main > div {
   max-width: 850px;
-  margin: 0 auto 20px;
-  padding: 22px;
+
+  margin: 0 auto 18px;
+
+  padding: 24px;
 
   background: var(--fundo-card);
-  border: 1px solid var(--marrom-oliva);
-  border-radius: 12px;
 
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.28),
+    0 8px 24px rgba(0, 0, 0, 0.16);
+
+  transition:
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+main > div:hover {
+  border-color: #3c6b52;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 10px 28px rgba(0, 0, 0, 0.18);
 }
 
 /* Títulos dentro dos cards */
+
 main > div h2,
 main > div h3 {
   margin-top: 0;
 }
 
-/* Formulários das páginas normais */
+/* FORMULÁRIOS DAS PÁGINAS NORMAIS */
+
 main > form {
   max-width: 520px;
-  margin: 0 auto 30px;
-  padding: 24px;
+
+  margin: 0 auto 32px;
+
+  padding: 26px;
 
   background: var(--fundo-card);
 
-  border: 1px solid var(--marrom-oliva);
-  border-radius: 12px;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
 
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.28),
+    0 8px 24px rgba(0, 0, 0, 0.16);
 }
 
 main > form label {
+  font-size: 14px;
   font-weight: 600;
+
   color: var(--texto);
 }
 
@@ -202,48 +258,66 @@ main > form textarea {
   width: 100%;
 
   padding: 11px 12px;
+
   margin-top: 6px;
 
-  border: 1px solid var(--marrom-oliva);
-  border-radius: 8px;
+  border: 1px solid var(--borda);
+  border-radius: 7px;
 
   background: var(--fundo-input);
+
   color: var(--texto);
 
-  transition: 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+main > form input::placeholder,
+main > form textarea::placeholder {
+  color: #71877a;
 }
 
 main > form input:focus,
 main > form select:focus,
 main > form textarea:focus {
   outline: none;
+
   border-color: var(--verde-principal);
-  box-shadow: 0 0 0 3px rgba(143, 176, 112, 0.18);
+
+  box-shadow: 0 0 0 3px rgba(79, 159, 112, 0.14);
 }
 
-/* Botões das páginas normais */
+/* BOTÕES DAS PÁGINAS NORMAIS */
+
 main > form button,
 main > div button,
 main > button {
   padding: 10px 16px;
 
-  border: none;
-  border-radius: 8px;
+  border: 1px solid #365c48;
+  border-radius: 7px;
 
-  background: var(--verde-principal);
-  color: var(--quase-preto);
+  background: #1a2c22;
+
+  color: #eaf5ee;
 
   cursor: pointer;
-  font-weight: 700;
 
-  transition: 0.2s;
+  font-weight: 600;
+
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
 }
 
 main > form button:hover,
 main > div button:hover,
 main > button:hover {
-  background: var(--verde-escuro);
-  color: var(--texto);
+  background: #244132;
+
+  border-color: var(--verde-principal);
 
   transform: translateY(-1px);
 }
@@ -251,22 +325,32 @@ main > button:hover {
 main > form button:disabled,
 main > div button:disabled,
 main > button:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
+
   cursor: not-allowed;
+
   transform: none;
+}
+main > p {
+  text-align: center;
+  margin: 0 auto;
+  color: var(--texto-secundario);
+  font-size: 17px;
 }
 
 /* ÁREA ADMIN */
 
 .admin-container {
   max-width: 1100px;
+
   margin: 0 auto;
+
   padding: 30px;
 }
 
 .admin-container h1 {
   margin-top: 0;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .admin-container h2 {
@@ -277,52 +361,86 @@ main > button:disabled {
 
 .admin-tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
-  padding: 10px 0 20px;
-  border-bottom: 1px solid var(--marrom-oliva);
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-}
 
+  gap: 10px;
+
+  max-width: 760px;
+  margin: 0 auto 30px;
+
+  padding: 10px 0 18px;
+
+  border-bottom: 1px solid var(--borda);
+}
 .admin-tabs button {
-  padding: 10px 18px;
-  border: 1px solid var(--marrom-oliva);
-  border-radius: 8px;
+  padding: 9px 16px;
+
+  border: 1px solid var(--borda);
+  border-radius: 7px;
+
   cursor: pointer;
-  font-weight: 700;
+
+  font-size: 14px;
+  font-weight: 600;
+
   background: var(--fundo-card);
-  color: var(--texto);
-  transition: 0.2s;
+
+  color: var(--texto-secundario);
+
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
 }
 
 .admin-tabs button:hover {
-  background: var(--verde-escuro);
-  border-color: var(--verde-escuro);
-  transform: translateY(-1px);
+  background: #1d2922;
+
+  color: #dff5e8;
+
+  border-color: #3d5a49;
 }
 
 .admin-tabs button.ativo {
   background: var(--verde-principal);
-  color: var(--quase-preto);
+
+  color: #07110b;
+
   border-color: var(--verde-principal);
 }
 
-/* CARDS */
+/* CARDS ADMIN */
 
 .admin-card {
-  padding: 20px;
-  margin-bottom: 18px;
-  border: 1px solid var(--marrom-oliva);
-  border-radius: 12px;
+  padding: 22px;
+
+  margin-bottom: 16px;
+
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+
   background: var(--fundo-card);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-  transition: 0.2s;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.28),
+    0 8px 24px rgba(0, 0, 0, 0.14);
+
+  transition:
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .admin-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--verde-escuro);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+
+  border-color: #3d5a49;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 10px 28px rgba(0, 0, 0, 0.18);
 }
 
 .admin-card h3 {
@@ -331,7 +449,8 @@ main > button:disabled {
 }
 
 .admin-card p {
-  margin: 8px 0;
+  margin: 7px 0;
+
   color: var(--texto-secundario);
 }
 
@@ -348,40 +467,62 @@ main > button:disabled {
 .admin-button {
   margin-top: 10px;
   margin-right: 8px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
+
+  padding: 9px 15px;
+
+  border: 1px solid #365c48;
+  border-radius: 7px;
+
   cursor: pointer;
-  font-weight: 700;
-  background: var(--verde-principal);
-  color: var(--quase-preto);
-  transition: 0.2s;
+
+  font-weight: 600;
+
+  background: #1a2c22;
+
+  color: #eaf5ee;
+
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
 }
 
 .admin-button:hover {
-  background: var(--verde-escuro);
-  color: var(--texto);
+  background: #244132;
+
+  border-color: var(--verde-principal);
+
   transform: translateY(-1px);
 }
 
 .admin-button.danger {
-  background: var(--perigo);
-  color: white;
+  background: transparent;
+
+  border-color: rgba(201, 79, 79, 0.55);
+
+  color: #e97979;
 }
 
 .admin-button.danger:hover {
-  background: var(--perigo-hover);
+  background: rgba(201, 79, 79, 0.12);
+
+  border-color: var(--perigo);
+
+  color: #f19a9a;
 }
 
-/* FORMULÁRIOS */
+/* FORMULÁRIOS ADMIN */
 
 .admin-container form {
   max-width: 600px;
-  margin-bottom: 30px;
+
+  margin-bottom: 32px;
 }
 
 .admin-container label {
+  font-size: 14px;
   font-weight: 600;
+
   color: var(--texto);
 }
 
@@ -389,31 +530,43 @@ main > button:disabled {
 .admin-container select,
 .admin-container textarea {
   width: 100%;
-  padding: 10px 12px;
+
+  padding: 11px 12px;
+
   margin-top: 6px;
-  border: 1px solid var(--marrom-oliva);
-  border-radius: 8px;
+
+  border: 1px solid var(--borda);
+  border-radius: 7px;
+
   font-size: 14px;
+
   background: var(--fundo-input);
+
   color: var(--texto);
-  transition: 0.2s;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .admin-container input::placeholder,
 .admin-container textarea::placeholder {
-  color: #8f8a7d;
+  color: #71877a;
 }
 
 .admin-container input:focus,
 .admin-container select:focus,
 .admin-container textarea:focus {
   outline: none;
+
   border-color: var(--verde-principal);
-  box-shadow: 0 0 0 3px rgba(143, 176, 112, 0.18);
+
+  box-shadow: 0 0 0 3px rgba(79, 159, 112, 0.14);
 }
 
 .admin-container select option {
   background: var(--fundo-card);
+
   color: var(--texto);
 }
 
@@ -421,9 +574,12 @@ main > button:disabled {
 
 .pedido-itens {
   margin-top: 20px;
-  padding: 15px;
-  background: #11110e;
-  border: 1px solid var(--marrom-oliva);
+
+  padding: 16px;
+
+  background: var(--fundo-input);
+
+  border: 1px solid var(--borda);
   border-radius: 8px;
 }
 
@@ -433,7 +589,8 @@ main > button:disabled {
 
 .pedido-item {
   padding: 10px 0;
-  border-bottom: 1px solid rgba(113, 108, 89, 0.55);
+
+  border-bottom: 1px solid var(--borda);
 }
 
 .pedido-item:last-child {
@@ -446,12 +603,15 @@ main > button:disabled {
 
 .pedido-acoes label {
   display: block;
+
   margin-bottom: 6px;
+
   font-weight: 600;
 }
 
 .pedido-acoes select {
   max-width: 250px;
+
   margin-right: 10px;
 }
 
@@ -459,69 +619,81 @@ main > button:disabled {
 
 .status-badge {
   display: inline-block;
+
   padding: 5px 10px;
+
   border-radius: 999px;
-  font-size: 13px;
+
+  font-size: 12px;
   font-weight: 700;
+
   text-transform: capitalize;
 }
 
 .status-badge.pendente {
-  background: #6f642c;
-  color: #fff4b8;
+  background: rgba(234, 179, 8, 0.15);
+
+  color: #facc15;
 }
 
 .status-badge.confirmado {
-  background: #3d5c72;
-  color: #e2f2ff;
+  background: rgba(59, 130, 246, 0.15);
+
+  color: #60a5fa;
 }
 
 .status-badge.preparando {
-  background: var(--marrom-oliva);
-  color: #fff8dc;
+  background: rgba(79, 159, 112, 0.16);
+
+  color: #8fd0a7;
 }
 
 .status-badge.enviado {
-  background: #4a4d72;
-  color: #ececff;
+  background: rgba(14, 165, 233, 0.15);
+
+  color: #38bdf8;
 }
 
 .status-badge.entregue {
-  background: var(--verde-escuro);
-  color: #e7f8e5;
+  background: rgba(79, 159, 112, 0.2);
+
+  color: #7fdaa0;
 }
 
 .status-badge.cancelado {
-  background: #713331;
-  color: #ffe4e2;
+  background: rgba(201, 79, 79, 0.15);
+
+  color: #ef8f8f;
 }
 
 /* LINHAS */
 
 hr {
   border: none;
-  border-top: 1px solid var(--marrom-oliva);
-  opacity: 0.5;
-  margin: 25px 0;
+
+  border-top: 1px solid var(--borda);
+
+  margin: 26px 0;
 }
 
 /* SCROLLBAR */
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--quase-preto);
+  background: var(--fundo);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--marrom-oliva);
+  background: #304a3b;
+
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--verde-escuro);
+  background: #3d6a51;
 }
 
 /* RESPONSIVIDADE */
@@ -529,17 +701,34 @@ hr {
 @media (max-width: 768px) {
   nav {
     flex-wrap: wrap;
-    padding: 16px 20px;
-    gap: 12px;
+
+    padding: 14px 18px;
+
+    gap: 6px;
   }
 
   nav span {
     margin-left: 0;
+
     width: 100%;
   }
 
-  .admin-container {
+  main {
+    width: min(100% - 20px, 1100px);
+
+    padding-top: 28px;
+  }
+
+  main > h1 {
+    font-size: 26px;
+  }
+
+  main > form {
     padding: 20px;
+  }
+
+  .admin-container {
+    padding: 20px 0;
   }
 
   .admin-tabs {
@@ -552,12 +741,14 @@ hr {
 
   .pedido-acoes select {
     max-width: 100%;
+
     margin-right: 0;
     margin-bottom: 10px;
   }
 
   .admin-button {
     width: 100%;
+
     margin-right: 0;
   }
 }
