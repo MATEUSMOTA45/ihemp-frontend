@@ -128,6 +128,8 @@ O projeto também utiliza variáveis de ambiente para configuração da API e po
 
 ---
 
+---
+
 ## Arquitetura do frontend
 
 O projeto foi organizado separando responsabilidades em componentes, páginas e contextos.
@@ -163,184 +165,258 @@ src/
 ├── App.tsx
 ├── index.css
 └── main.tsx
-Organização da aplicação
-Pages
+```
+
+---
+
+## Organização da aplicação
+
+### Pages
 
 As páginas representam as principais telas da aplicação.
 
 Entre elas:
 
-Home
-Login
-Cadastro
-Produtos
-Carrinho
-Perfil
-Meus Pedidos
-Área Administrativa
-Components
+- Home
+- Login
+- Cadastro
+- Produtos
+- Carrinho
+- Perfil
+- Meus Pedidos
+- Área Administrativa
+
+### Components
 
 Os componentes são utilizados para separar partes reutilizáveis da interface e funcionalidades específicas.
 
 Exemplos:
 
-Navbar
-Proteção de rotas
-Proteção de rotas administrativas
-Gerenciamento administrativo de produtos
-Gerenciamento administrativo de lojas
-Gerenciamento administrativo de pedidos
-Context API
+- Navbar
+- Proteção de rotas
+- Proteção de rotas administrativas
+- Gerenciamento administrativo de produtos
+- Gerenciamento administrativo de lojas
+- Gerenciamento administrativo de pedidos
+
+### Context API
 
 O projeto utiliza Context API para compartilhar estados globais.
 
-AuthContext
+#### AuthContext
 
 Responsável por:
 
-estado de autenticação;
-informações do usuário;
-login;
-logout;
-carregamento do perfil autenticado.
-CarrinhoContext
+- Estado de autenticação
+- Informações do usuário
+- Login
+- Logout
+- Carregamento do perfil autenticado
+
+#### CarrinhoContext
 
 Responsável por:
 
-produtos adicionados;
-quantidades;
-remoção de produtos;
-limpeza do carrinho;
-validação de loja;
-validação de estoque.
-Autenticação
+- Produtos adicionados
+- Quantidades
+- Remoção de produtos
+- Limpeza do carrinho
+- Validação de loja
+- Validação de estoque
+
+---
+
+## Autenticação
 
 Após o login, o backend retorna um token JWT.
 
-O token é armazenado no localStorage:
+O token é armazenado no `localStorage`:
 
+```ts
 localStorage.setItem("token", token);
+```
 
 Nas requisições protegidas, ele é enviado através do cabeçalho:
 
-Authorization: `Bearer ${token}`
+```text
+Authorization: Bearer TOKEN
+```
 
-O estado global de autenticação é gerenciado pelo AuthContext.
+O estado global de autenticação é gerenciado pelo `AuthContext`.
 
 A Navbar utiliza esse contexto para alterar os links exibidos conforme o usuário esteja autenticado ou não.
 
 Usuários administradores também recebem acesso à área administrativa.
 
-Rotas protegidas
+---
+
+## Rotas protegidas
 
 Algumas páginas só podem ser acessadas por usuários autenticados.
 
 O projeto possui componentes específicos para controle de acesso:
 
+```text
 RotaProtegida.tsx
 RotaAdmin.tsx
+```
 
-A RotaProtegida impede o acesso a páginas privadas sem autenticação.
+A `RotaProtegida` impede o acesso a páginas privadas sem autenticação.
 
-A RotaAdmin restringe determinadas áreas apenas para usuários com perfil administrativo.
+A `RotaAdmin` restringe determinadas áreas apenas para usuários com perfil administrativo.
 
-Integração com a API
+---
+
+## Integração com a API
 
 O frontend consome a API REST do backend IHEMP através da Fetch API.
 
 A URL base da API é configurada por uma variável de ambiente:
 
+```env
 VITE_API_URL=https://ihemp-backend-docker.onrender.com
+```
 
 Dentro da aplicação:
 
+```ts
 const API_URL = import.meta.env.VITE_API_URL;
+```
 
 As chamadas utilizam essa variável:
 
+```ts
 fetch(`${API_URL}/api/produtos`)
+```
 
 Isso evita deixar a URL do backend repetida em vários arquivos e facilita a troca de ambiente.
 
-Principais endpoints utilizados
-Usuários
+---
+
+## Principais endpoints utilizados
+
+### Usuários
+
+```text
 POST /api/usuarios
 POST /api/usuarios/login
 GET  /api/usuarios/perfil/me
 GET  /api/usuarios
 PUT  /api/usuarios/:id/admin
-Produtos
+```
+
+### Produtos
+
+```text
 GET    /api/produtos
 POST   /api/produtos
 PUT    /api/produtos/:id
 DELETE /api/produtos/:id
-Lojas
+```
+
+### Lojas
+
+```text
 GET    /api/lojas
 POST   /api/lojas
 PUT    /api/lojas/:id
 DELETE /api/lojas/:id
-Pedidos
+```
+
+### Pedidos
+
+```text
 POST   /api/pedidos
 GET    /api/pedidos/meus
 GET    /api/pedidos
 PUT    /api/pedidos/:id/status
 DELETE /api/pedidos/:id
-Variáveis de ambiente
+```
 
-O arquivo .env não é enviado ao GitHub.
+---
 
-Ao clonar o projeto em outro computador, crie um arquivo .env na raiz do frontend com:
+## Variáveis de ambiente
 
+O arquivo `.env` não é enviado ao GitHub.
+
+Ao clonar o projeto em outro computador, crie um arquivo `.env` na raiz do frontend com:
+
+```env
 VITE_API_URL=https://ihemp-backend-docker.onrender.com
+```
 
-O .env está incluído no .gitignore.
+O `.env` está incluído no `.gitignore`.
 
-Como executar localmente
+---
+
+## Como executar localmente
 
 Clone o repositório:
 
+```bash
 git clone https://github.com/MATEUSMOTA45/ihemp-frontend.git
+```
 
 Entre na pasta:
 
+```bash
 cd ihemp-frontend
+```
 
 Instale as dependências:
 
+```bash
 npm install
+```
 
-Crie um arquivo .env:
+Crie um arquivo `.env`:
 
+```env
 VITE_API_URL=https://ihemp-backend-docker.onrender.com
+```
 
 Execute o projeto:
 
+```bash
 npm run dev
+```
 
 Por padrão, o Vite disponibiliza a aplicação em:
 
+```text
 http://localhost:5173
-Build
+```
+
+---
+
+## Build
 
 Para gerar uma versão de produção:
 
+```bash
 npm run build
+```
 
 Os arquivos gerados ficam na pasta:
 
+```text
 dist/
-Deploy
+```
+---
 
-O frontend está publicado na Vercel.
+## Deploy
+
+O frontend está publicado na **Vercel**.
 
 Aplicação:
 
-https://ihemp-frontend.vercel.app
+**[https://ihemp-frontend.vercel.app](https://ihemp-frontend.vercel.app)**
 
 O projeto está integrado ao GitHub.
 
 O fluxo funciona assim:
 
+```text
 Alteração no código
         ↓
 git commit
@@ -354,108 +430,128 @@ Vercel detecta a alteração
 Build do projeto
         ↓
 Deploy automático
+```
 
-A variável VITE_API_URL também está configurada no ambiente da Vercel.
+A variável `VITE_API_URL` também está configurada no ambiente da Vercel.
 
-Backend
+---
 
-O backend está publicado separadamente no Render.
+## Backend
+
+O backend está publicado separadamente no **Render**.
 
 API:
 
-https://ihemp-backend-docker.onrender.com
+**[https://ihemp-backend-docker.onrender.com](https://ihemp-backend-docker.onrender.com)**
 
 Repositório:
 
-ihemp-backend
+**[ihemp-backend](https://github.com/MATEUSMOTA45/ihemp-backend)**
 
 O backend utiliza:
 
-Node.js
-Express
-MongoDB Atlas
-Mongoose
-JWT
-bcryptjs
-Docker
-Render
-Interface
+- Node.js
+- Express
+- MongoDB Atlas
+- Mongoose
+- JWT
+- bcryptjs
+- Docker
+- Render
+
+---
+
+## Interface
 
 A interface utiliza um tema escuro com identidade visual em tons de verde.
 
 Entre os elementos estilizados estão:
 
-Navbar
-Formulários
-Cards
-Área administrativa
-Botões
-Estados dos pedidos
-Layout responsivo
+- Navbar
+- Formulários
+- Cards
+- Área administrativa
+- Botões
+- Estados dos pedidos
+- Layout responsivo
 
 O CSS foi organizado para manter consistência visual entre as páginas sem depender de bibliotecas externas de componentes.
 
-Status do projeto
-Implementado
-React + TypeScript
-Vite
-React Router
-Context API
-Cadastro
-Login
-Logout
-JWT
-Perfil protegido
-Rotas protegidas
-Rotas administrativas
-Navbar dinâmica
-Listagem de produtos
-Carrinho
-Validação de estoque
-Validação de loja
-Finalização de pedidos
-Meus pedidos
-Área administrativa
-Gerenciamento de usuários
-CRUD de produtos
-CRUD de lojas
-Gerenciamento de pedidos
-Atualização de status
-Integração com backend
-Variáveis de ambiente
-Interface responsiva
-Git e GitHub
-Deploy na Vercel
-Próximas melhorias
-Melhorias de UX
-Notificações visuais
-Loading states mais avançados
-Tratamento centralizado de erros
-Busca de produtos
-Filtros por categoria
-Paginação
-Upload e exibição de imagens
-Persistência do carrinho no navegador
-Melhorias de acessibilidade
-Testes automatizados
-Melhorias de responsividade
-Refinamento da interface administrativa
-Repositórios
-Frontend
+---
 
-ihemp-frontend
+## Status do projeto
 
-Backend
+### Implementado
 
-ihemp-backend
+- React + TypeScript
+- Vite
+- React Router
+- Context API
+- Cadastro
+- Login
+- Logout
+- JWT
+- Perfil protegido
+- Rotas protegidas
+- Rotas administrativas
+- Navbar dinâmica
+- Listagem de produtos
+- Carrinho
+- Validação de estoque
+- Validação de loja
+- Finalização de pedidos
+- Meus pedidos
+- Área administrativa
+- Gerenciamento de usuários
+- CRUD de produtos
+- CRUD de lojas
+- Gerenciamento de pedidos
+- Atualização de status
+- Integração com backend
+- Variáveis de ambiente
+- Interface responsiva
+- Git e GitHub
+- Deploy na Vercel
 
-Autor
+---
 
-Mateus Henrique Ferreira Mota
+## Próximas melhorias
 
-Desenvolvedor Full Stack Júnior
+- Melhorias de UX
+- Notificações visuais
+- Loading states mais avançados
+- Tratamento centralizado de erros
+- Busca de produtos
+- Filtros por categoria
+- Paginação
+- Upload e exibição de imagens
+- Persistência do carrinho no navegador
+- Melhorias de acessibilidade
+- Testes automatizados
+- Melhorias de responsividade
+- Refinamento da interface administrativa
+
+---
+
+## Repositórios
+
+### Frontend
+
+**[ihemp-frontend](https://github.com/MATEUSMOTA45/ihemp-frontend)**
+
+### Backend
+
+**[ihemp-backend](https://github.com/MATEUSMOTA45/ihemp-backend)**
+
+---
+
+## Autor
+
+**Mateus Henrique Ferreira Mota**
+
+Desenvolvedor Full Stack Júnior  
 Estudante de Análise e Desenvolvimento de Sistemas.
 
 GitHub:
 
-github.com/MATEUSMOTA45
+**[github.com/MATEUSMOTA45](https://github.com/MATEUSMOTA45)**
