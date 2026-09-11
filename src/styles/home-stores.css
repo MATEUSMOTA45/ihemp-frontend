@@ -1,0 +1,152 @@
+/* =========================================================
+   IHEMP 2.0 — LOJAS NA HOME
+   ========================================================= */
+
+.home-stores {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.home-store {
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-store div.ihemp-card {
+  height: 100%;
+}
+
+.home-store__cover {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-brand-900);
+}
+
+.home-store__cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 48%, rgba(3, 20, 11, 0.35));
+  pointer-events: none;
+}
+
+.home-store__cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.home-store:hover .home-store__cover img {
+  transform: scale(1.04);
+}
+
+.home-store__cover .ihemp-badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 1;
+  box-shadow: var(--shadow-sm);
+}
+
+.home-store__body {
+  display: flex;
+  min-height: 10.5rem;
+  flex-direction: column;
+  padding: var(--space-4);
+}
+
+.home-store__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.home-store__title h3 {
+  margin: 0;
+  overflow: hidden;
+  font-size: var(--font-size-lg);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-store__title svg {
+  flex: 0 0 auto;
+  color: var(--color-brand-600);
+}
+
+.home-store__body p {
+  display: -webkit-box;
+  margin: var(--space-2) 0 var(--space-3);
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.home-store__address {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.home-store__address svg {
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+  color: var(--color-brand-600);
+}
+
+.home-store__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  color: var(--color-brand-700);
+  font-size: var(--font-size-sm);
+  font-weight: 750;
+}
+
+.home-stores__message {
+  margin: 0;
+  text-align: center;
+}
+
+.home-store-skeleton {
+  min-height: 19rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    100deg,
+    var(--color-surface-soft) 30%,
+    var(--color-surface) 50%,
+    var(--color-surface-soft) 70%
+  );
+  background-size: 220% 100%;
+  animation: home-store-skeleton 1.4s ease-in-out infinite;
+}
+
+@keyframes home-store-skeleton {
+  to {
+    background-position-x: -220%;
+  }
+}
+
+@media (max-width: 1020px) {
+  .home-stores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .home-stores {
+    grid-template-columns: 1fr;
+  }
+}

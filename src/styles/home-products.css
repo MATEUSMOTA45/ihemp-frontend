@@ -1,0 +1,181 @@
+/* =========================================================
+   IHEMP 2.0 — PRODUTOS EM DESTAQUE NA HOME
+   ========================================================= */
+
+.home-products {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.home-product {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.home-product__image {
+  position: relative;
+  display: grid;
+  aspect-ratio: 1 / 0.82;
+  overflow: hidden;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 58%, rgba(188, 235, 195, 0.3), transparent 48%),
+    #ffffff;
+}
+
+.home-product__image img {
+  display: block;
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  transition: transform var(--transition-base);
+}
+
+.home-product:hover .home-product__image img {
+  transform: scale(1.04);
+}
+
+.home-product__image .ihemp-badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+}
+
+.home-product__body {
+  display: flex;
+  min-height: 10.5rem;
+  flex-direction: column;
+  padding: var(--space-4);
+}
+
+.home-product__body h3 {
+  margin: 0;
+  overflow: hidden;
+  font-size: var(--font-size-md);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-product__body > p {
+  margin: var(--space-1) 0 var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.home-product__store {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-product__store svg {
+  flex: 0 0 auto;
+  color: var(--color-brand-600);
+}
+
+.home-product__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-4);
+}
+
+.home-product__footer strong {
+  font-size: var(--font-size-md);
+}
+
+.home-product__footer button {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-600);
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.home-product__footer button:hover {
+  background: var(--color-brand-700);
+  transform: translateY(-1px);
+}
+
+.home-products__notice {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-brand-200);
+  border-radius: var(--radius-md);
+  background: var(--color-brand-50);
+  color: var(--color-brand-800);
+  font-size: var(--font-size-sm);
+}
+
+.home-products__message {
+  margin: 0;
+  text-align: center;
+}
+
+.home-product-skeleton {
+  min-height: 20rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    100deg,
+    var(--color-surface-soft) 30%,
+    var(--color-surface) 50%,
+    var(--color-surface-soft) 70%
+  );
+  background-size: 220% 100%;
+  animation: home-product-skeleton 1.4s ease-in-out infinite;
+}
+
+@keyframes home-product-skeleton {
+  to {
+    background-position-x: -220%;
+  }
+}
+
+@media (max-width: 1080px) {
+  .home-products {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .home-products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .home-products {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .home-products::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-products > * {
+    min-width: 78%;
+    scroll-snap-align: start;
+  }
+}

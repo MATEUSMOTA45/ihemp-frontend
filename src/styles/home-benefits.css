@@ -1,0 +1,74 @@
+/* =========================================================
+   IHEMP 2.0 â€” BENEFÃCIOS DA HOME
+   ========================================================= */
+
+.home-benefits {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: var(--space-12);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.home-benefit {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.home-benefit + .home-benefit {
+  border-left: 1px solid var(--color-border);
+}
+
+.home-benefit__icon {
+  display: grid;
+  width: 2.8rem;
+  height: 2.8rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--color-brand-50);
+  color: var(--color-brand-700);
+}
+
+.home-benefit h3 {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-sm);
+}
+
+.home-benefit p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: 1.45;
+}
+
+@media (max-width: 960px) {
+  .home-benefits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-benefit:nth-child(3) {
+    border-left: 0;
+  }
+
+  .home-benefit:nth-child(n + 3) {
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+@media (max-width: 560px) {
+  .home-benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .home-benefit + .home-benefit {
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+  }
+}

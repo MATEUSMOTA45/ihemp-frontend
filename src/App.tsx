@@ -12,6 +12,9 @@ import Perfil from "./pages/Perfil";
 import Admin from "./pages/Admin";
 import Carrinho from "./pages/Carrinho";
 import MeusPedidos from "./pages/MeusPedidos";
+import Loja from "./pages/Loja";
+import Produto from "./pages/Produto";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -43,7 +46,17 @@ function App() {
 
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/produtos" element={<Produtos />} />
+        <Route path="/lojas/:lojaId" element={<Loja />} />
+        <Route path="/produtos/:produtoId" element={<Produto />} />
         <Route path="/carrinho" element={<Carrinho />} />
+        <Route
+              path="/checkout"
+              element={
+        <RotaProtegida>
+          <Checkout />
+        </RotaProtegida>
+      }
+    />
         <Route 
         path="/meus-pedidos" 
         element={ 

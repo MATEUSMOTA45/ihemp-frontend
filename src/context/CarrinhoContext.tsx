@@ -16,8 +16,11 @@ type Loja = {
 type Produto = {
   _id: string;
   nome: string;
+  descricao?: string;
   preco: number;
   estoque: number;
+  categoria?: string;
+  ativo?: boolean;
   loja: Loja | null;
 };
 
@@ -31,6 +34,7 @@ type ItemCarrinho = {
 type CarrinhoContextType = {
   itens: ItemCarrinho[];
   adicionarProduto: (produto: Produto) => string | null;
+  alterarQuantidade: (id: string, quantidade: number) => void;
   removerProduto: (id: string) => void;
   limparCarrinho: () => void;
 };
@@ -114,6 +118,28 @@ export function CarrinhoProvider({
     return null;
   }
 
+  // Altera a quantidade de um produto
+  function alterarQuantidade(
+    id: string,
+    quantidade: number
+  ) {
+    setItens((itensAtuais) =>
+      itensAtuais
+        .map((item) =>
+          item.produto._id === id
+            ? {
+                ...item,
+                quantidade: Math.min(
+                  Math.max(quantidade, 0),
+                  item.produto.estoque
+                ),
+              }
+            : item
+        )
+        .filter((item) => item.quantidade > 0)
+    );
+  }
+
   // Remove produto do carrinho
   function removerProduto(id: string) {
     setItens((itensAtuais) =>
@@ -134,6 +160,7 @@ export function CarrinhoProvider({
       value={{
         itens,
         adicionarProduto,
+        alterarQuantidade,
         removerProduto,
         limparCarrinho,
       }}

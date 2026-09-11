@@ -1,0 +1,899 @@
+/* =========================================================
+   IHEMP 2.0 — DESIGN SYSTEM
+   Tokens visuais usados por todas as páginas e componentes.
+   ========================================================= */
+
+:root {
+  /* Marca */
+  --color-brand-50: #effbef;
+  --color-brand-100: #dcf5df;
+  --color-brand-200: #bcebc3;
+  --color-brand-300: #8bdc99;
+  --color-brand-400: #50c267;
+  --color-brand-500: #20a53e;
+  --color-brand-600: #11862d;
+  --color-brand-700: #0d6a25;
+  --color-brand-800: #0d541f;
+  --color-brand-900: #0a3516;
+
+  /* Cores semânticas */
+  --color-background: #f7f9f7;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f1f6f1;
+  --color-surface-strong: #e6f1e7;
+  --color-text: #102117;
+  --color-text-muted: #68736c;
+  --color-text-soft: #8d9690;
+  --color-border: #e1e7e2;
+  --color-border-strong: #cbd5cd;
+  --color-success: #11862d;
+  --color-warning: #e9a500;
+  --color-danger: #c43d43;
+  --color-danger-hover: #a62f35;
+  --color-info: #2475d0;
+
+  /* Tipografia */
+  --font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: clamp(1.75rem, 3vw, 2.5rem);
+  --font-size-display: clamp(2.25rem, 5vw, 4rem);
+  --line-height-tight: 1.15;
+  --line-height-normal: 1.55;
+
+  /* Espaçamentos */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Formas */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-pill: 999px;
+
+  /* Elevação */
+  --shadow-sm: 0 1px 2px rgba(16, 33, 23, 0.06);
+  --shadow-md: 0 8px 24px rgba(16, 33, 23, 0.08);
+  --shadow-lg: 0 18px 48px rgba(16, 33, 23, 0.12);
+  --focus-ring: 0 0 0 3px rgba(32, 165, 62, 0.2);
+
+  /* Movimento */
+  --transition-fast: 160ms ease;
+  --transition-base: 220ms ease;
+
+  /* Layout */
+  --container-width: 1200px;
+  --page-gutter: clamp(1rem, 4vw, 2rem);
+
+  /* Compatibilidade com as telas da versão atual */
+  --verde-principal: var(--color-brand-600);
+  --verde-escuro: var(--color-brand-800);
+  --quase-preto: var(--color-text);
+  --fundo: var(--color-background);
+  --fundo-card: var(--color-surface);
+  --fundo-input: #e4ece6;
+  --texto: var(--color-text);
+  --texto-secundario: var(--color-text-muted);
+  --borda: #b4c3b7;
+  --perigo: var(--color-danger);
+  --perigo-hover: var(--color-danger-hover);
+}
+
+ * {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-brand-900);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+/* =========================================================
+   COMPONENTE: BUTTON
+   ========================================================= */
+
+  button.ihemp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+
+  cursor: pointer;
+
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+button.ihemp-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button.ihemp-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button.ihemp-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+/* Tamanhos */
+
+button.ihemp-button--small {
+  min-height: 2.25rem;
+  padding: 0.5rem 0.875rem;
+  font-size: var(--font-size-sm);
+}
+
+button.ihemp-button--medium {
+  min-height: 2.75rem;
+  padding: 0.75rem 1.125rem;
+  font-size: var(--font-size-md);
+}
+
+button.ihemp-button--large {
+  min-height: 3.25rem;
+  padding: 0.875rem 1.5rem;
+  font-size: var(--font-size-lg);
+}
+
+button.ihemp-button--full-width {
+  width: 100%;
+}
+
+/* Botão principal */
+
+button.ihemp-button--primary {
+  background: var(--color-brand-600);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+button.ihemp-button--primary:hover:not(:disabled) {
+  background: var(--color-brand-700);
+  box-shadow: var(--shadow-md);
+}
+
+/* Botão secundário */
+
+button.ihemp-button--secondary {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-brand-700);
+}
+
+button.ihemp-button--secondary:hover:not(:disabled) {
+  border-color: var(--color-brand-500);
+  background: var(--color-brand-50);
+}
+
+/* Botão transparente */
+
+button.ihemp-button--ghost {
+  background: transparent;
+  color: var(--color-text);
+}
+
+button.ihemp-button--ghost:hover:not(:disabled) {
+  background: var(--color-surface-soft);
+}
+
+/* Botão de perigo */
+
+button.ihemp-button--danger {
+  background: var(--color-danger);
+  color: #ffffff;
+}
+
+button.ihemp-button--danger:hover:not(:disabled) {
+  background: var(--color-danger-hover);
+}
+
+/* Animação de carregamento */
+
+.ihemp-button__spinner {
+  width: 1rem;
+  height: 1rem;
+
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-pill);
+
+  animation: ihemp-button-spin 700ms linear infinite;
+}
+
+@keyframes ihemp-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* =========================================================
+   COMPONENTE: SEARCH INPUT
+   ========================================================= */
+
+.ihemp-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  width: 100%;
+  min-height: 3rem;
+  padding: 0 var(--space-4);
+
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text-muted);
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.ihemp-search:hover {
+  border-color: var(--color-brand-300);
+}
+
+.ihemp-search:focus-within {
+  border-color: var(--color-brand-500);
+  box-shadow: var(--focus-ring);
+}
+
+.ihemp-search__icon {
+  flex: 0 0 auto;
+
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ihemp-search__input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+  color: var(--color-text);
+
+  font-size: var(--font-size-sm);
+}
+
+.ihemp-search__input::placeholder {
+  color: var(--color-text-soft);
+}
+
+.ihemp-search__input:disabled {
+  cursor: not-allowed;
+}
+
+.ihemp-search:has(.ihemp-search__input:disabled) {
+  cursor: not-allowed;
+  background: var(--color-surface-soft);
+  opacity: 0.65;
+}
+
+/* Remove o botão padrão para manter o mesmo visual nos navegadores. */
+.ihemp-search__input::-webkit-search-cancel-button {
+  appearance: none;
+}
+/* =========================================================
+   COMPONENTE: CARD
+   ========================================================= */
+
+div.ihemp-card {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  overflow: hidden;
+
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+/* Card principal */
+
+div.ihemp-card--default {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+/* Card somente com borda */
+
+div.ihemp-card--outlined {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  box-shadow: none;
+}
+
+/* Card com fundo suave */
+
+div.ihemp-card--soft {
+  border: 1px solid transparent;
+  background: var(--color-surface-soft);
+  box-shadow: none;
+}
+
+/* Espaçamentos internos */
+
+div.ihemp-card--padding-none {
+  padding: 0;
+}
+
+div.ihemp-card--padding-small {
+  padding: var(--space-3);
+}
+
+div.ihemp-card--padding-medium {
+  padding: var(--space-5);
+}
+
+div.ihemp-card--padding-large {
+  padding: var(--space-8);
+}
+
+/* Card clicável */
+
+div.ihemp-card--interactive {
+  cursor: pointer;
+}
+
+div.ihemp-card--interactive:hover {
+  border-color: var(--color-brand-300);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+div.ihemp-card--interactive:focus-within {
+  border-color: var(--color-brand-500);
+  box-shadow: var(--focus-ring);
+}
+/* =========================================================
+   COMPONENTE: BADGE
+   ========================================================= */
+
+span.ihemp-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+
+  width: fit-content;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Tamanhos */
+
+span.ihemp-badge--small {
+  min-height: 1.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: var(--font-size-xs);
+}
+
+span.ihemp-badge--medium {
+  min-height: 1.75rem;
+  padding: 0.375rem 0.625rem;
+  font-size: var(--font-size-sm);
+}
+
+/* Cores */
+
+span.ihemp-badge--neutral {
+  border-color: var(--color-border);
+  background: var(--color-surface-soft);
+  color: var(--color-text-muted);
+}
+
+span.ihemp-badge--brand {
+  background: var(--color-brand-100);
+  color: var(--color-brand-800);
+}
+
+span.ihemp-badge--success {
+  background: #e5f7e8;
+  color: #0b6b24;
+}
+
+span.ihemp-badge--warning {
+  background: #fff5d6;
+  color: #8a5b00;
+}
+
+span.ihemp-badge--danger {
+  background: #fde9ea;
+  color: #a82f35;
+}
+
+span.ihemp-badge--info {
+  background: #e7f1fd;
+  color: #1c5eaa;
+}
+
+/* Bolinha opcional */
+
+.ihemp-badge__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+
+  border-radius: var(--radius-pill);
+  background: currentColor;
+}
+/* =========================================================
+   COMPONENTE: CONTAINER
+   ========================================================= */
+
+div.ihemp-container {
+  width: 100%;
+  max-width: var(--container-width);
+
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+div.ihemp-container--narrow {
+  max-width: 52rem;
+}
+
+div.ihemp-container--default {
+  max-width: var(--container-width);
+}
+
+div.ihemp-container--wide {
+  max-width: 90rem;
+}
+/* =========================================================
+   COMPONENTE: ICON
+   ========================================================= */
+
+.ihemp-icon {
+  display: block;
+  flex: 0 0 auto;
+}
+/* =========================================================
+   COMPONENTE: HEADER
+   Cole todo este bloco no final do design-system.css.
+   ========================================================= */
+
+.ihemp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(14px);
+}
+
+div.ihemp-header__container {
+  position: relative;
+}
+
+.ihemp-header__topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-height: 5.25rem;
+}
+
+.ihemp-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 0 0 auto;
+  padding: 0;
+  color: var(--color-brand-900);
+  text-decoration: none;
+}
+
+.ihemp-logo:hover {
+  color: var(--color-brand-700);
+}
+
+.ihemp-logo__mark {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+}
+
+.ihemp-logo__content {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.ihemp-logo__content strong {
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.ihemp-logo__content small {
+  margin-top: 0.35rem;
+  color: var(--color-text-muted);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.ihemp-header__location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 0 0 auto;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.ihemp-header__location > .ihemp-icon:first-child {
+  color: var(--color-brand-700);
+}
+
+.ihemp-header__search {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ihemp-header__search--desktop {
+  flex: 1 1 27rem;
+  max-width: 34rem;
+}
+
+.ihemp-header__search .ihemp-search {
+  padding-right: 3.25rem;
+}
+
+button.ihemp-header__search-button {
+  position: absolute;
+  top: 50%;
+  right: var(--space-2);
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+button.ihemp-header__search-button:hover {
+  background: var(--color-brand-50);
+  color: var(--color-brand-700);
+  transform: translateY(-50%);
+}
+
+nav.ihemp-header__actions {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: auto;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Neutraliza o estilo da navegaÃ§Ã£o antiga durante a migraÃ§Ã£o. */
+nav.ihemp-header__actions span {
+  width: auto;
+  margin-left: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.ihemp-header__action {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-width: 4.25rem;
+  min-height: 3.5rem;
+  margin: 0;
+  padding: 0.35rem 0.5rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-decoration: none;
+  list-style: none;
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.ihemp-header__action:hover {
+  background: var(--color-brand-50);
+  color: var(--color-brand-700);
+  transform: none;
+}
+
+.ihemp-header__profile-menu {
+  position: relative;
+}
+
+.ihemp-header__profile-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.ihemp-header__dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  display: grid;
+  width: 13rem;
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.ihemp-header__dropdown a,
+.ihemp-header__dropdown button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  margin: 0;
+  padding: 0.7rem 0.75rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-align: left;
+  text-decoration: none;
+}
+
+.ihemp-header__dropdown a:hover,
+.ihemp-header__dropdown button:hover {
+  background: var(--color-surface-soft);
+  color: var(--color-brand-700);
+  transform: none;
+}
+
+.ihemp-header__cart-icon {
+  position: relative;
+}
+
+.ihemp-header__cart-count {
+  position: absolute;
+  top: -0.55rem;
+  right: -0.75rem;
+  display: grid;
+  min-width: 1.2rem;
+  height: 1.2rem;
+  padding: 0 0.25rem;
+  place-items: center;
+  border: 2px solid var(--color-surface);
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-600);
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+button.ihemp-header__menu-button,
+.ihemp-header__search--mobile,
+nav.ihemp-header__mobile-menu {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .ihemp-logo__content small,
+  .ihemp-header__location {
+    display: none;
+  }
+}
+
+@media (max-width: 820px) {
+
+  .ihemp-header {
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+  .ihemp-header__topbar {
+    min-height: 4.25rem;
+  }
+
+  .ihemp-logo__mark {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .ihemp-logo__content strong {
+    font-size: 1.5rem;
+  }
+
+  .ihemp-header__search--desktop,
+  nav.ihemp-header__actions {
+    display: none;
+  }
+
+  button.ihemp-header__menu-button {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: 0 0 0 auto;
+    padding: 0;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  button.ihemp-header__menu-button:hover {
+    border-color: var(--color-brand-300);
+    background: var(--color-brand-50);
+    color: var(--color-brand-700);
+    transform: none;
+  }
+
+  .ihemp-header__search--mobile {
+    display: block;
+    padding-bottom: var(--space-3);
+  }
+
+  .ihemp-header__search--mobile .ihemp-search {
+    padding-right: var(--space-4);
+  }
+
+  nav.ihemp-header__mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: var(--page-gutter);
+    right: var(--page-gutter);
+    display: grid;
+    width: auto;
+    gap: var(--space-1);
+    margin: 0;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+  }
+
+  nav.ihemp-header__mobile-menu a,
+  nav.ihemp-header__mobile-menu button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    margin: 0;
+    padding: 0.8rem var(--space-3);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 650;
+    text-align: left;
+    text-decoration: none;
+  }
+
+  nav.ihemp-header__mobile-menu a:hover,
+  nav.ihemp-header__mobile-menu a.active,
+  nav.ihemp-header__mobile-menu button:hover {
+    background: var(--color-brand-50);
+    color: var(--color-brand-700);
+    transform: none;
+  }
+}

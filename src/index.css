@@ -1,21 +1,4 @@
-:root {
-  --verde-principal: #4f9f70;
-  --verde-escuro: #2f6f4f;
-
-  --quase-preto: #09110d;
-
-  --fundo: #0d1511;
-  --fundo-card: #132019;
-  --fundo-input: #0f1914;
-
-  --texto: #eef7f1;
-  --texto-secundario: #a9bdb0;
-
-  --borda: #294437;
-
-  --perigo: #c94f4f;
-  --perigo-hover: #a83f3f;
-}
+@import "./styles/design-system.css";
 
 /* RESET */
 
@@ -28,17 +11,6 @@ html {
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
   background: var(--fundo);
   color: var(--texto);
 }
@@ -158,7 +130,7 @@ main > h1 {
 
   text-align: center;
 
-  color: #eaf6ee;
+  color: var(--color-text);
 
   font-size: 32px;
   letter-spacing: -0.5px;
@@ -199,9 +171,7 @@ main > div {
   border: 1px solid var(--borda);
   border-radius: 10px;
 
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.28),
-    0 8px 24px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--shadow-md);
 
   transition:
     border-color 0.2s,
@@ -210,13 +180,11 @@ main > div {
 }
 
 main > div:hover {
-  border-color: #3c6b52;
+  border-color: var(--color-border-strong);
 
   transform: translateY(-1px);
 
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.3),
-    0 10px 28px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Títulos dentro dos cards */
@@ -240,9 +208,7 @@ main > form {
   border: 1px solid var(--borda);
   border-radius: 10px;
 
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.28),
-    0 8px 24px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--shadow-md);
 }
 
 main > form label {
@@ -275,7 +241,7 @@ main > form textarea {
 
 main > form input::placeholder,
 main > form textarea::placeholder {
-  color: #71877a;
+  color: var(--color-text-soft);
 }
 
 main > form input:focus,
@@ -285,7 +251,7 @@ main > form textarea:focus {
 
   border-color: var(--verde-principal);
 
-  box-shadow: 0 0 0 3px rgba(79, 159, 112, 0.14);
+  box-shadow: var(--focus-ring);
 }
 
 /* BOTÕES DAS PÁGINAS NORMAIS */
@@ -423,9 +389,7 @@ main > p {
 
   background: var(--fundo-card);
 
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.28),
-    0 8px 24px rgba(0, 0, 0, 0.14);
+  box-shadow: var(--shadow-md);
 
   transition:
     border-color 0.2s,
@@ -436,11 +400,9 @@ main > p {
 .admin-card:hover {
   transform: translateY(-1px);
 
-  border-color: #3d5a49;
+  border-color: var(--color-border-strong);
 
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.3),
-    0 10px 28px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-lg);
 }
 
 .admin-card h3 {
@@ -551,7 +513,7 @@ main > p {
 
 .admin-container input::placeholder,
 .admin-container textarea::placeholder {
-  color: #71877a;
+  color: var(--color-text-soft);
 }
 
 .admin-container input:focus,
@@ -561,7 +523,7 @@ main > p {
 
   border-color: var(--verde-principal);
 
-  box-shadow: 0 0 0 3px rgba(79, 159, 112, 0.14);
+  box-shadow: var(--focus-ring);
 }
 
 .admin-container select option {

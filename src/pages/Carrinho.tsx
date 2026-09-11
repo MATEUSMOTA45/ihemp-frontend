@@ -1,210 +1,330 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  ArrowLeft,
+  ChevronRight,
+  Minus,
+  PackageCheck,
+  Plus,
+  ShieldCheck,
+  ShoppingBag,
+  Store,
+  Trash2,
+  Truck,
+} from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+
+import productFlower from "../assets/products/product-flower.webp";
+import productGummies from "../assets/products/product-gummies.webp";
+import productPrerolls from "../assets/products/product-prerolls.webp";
+import productResin from "../assets/products/product-resin.webp";
+import productVape from "../assets/products/product-vape.webp";
+import Card from "../components/ui/Card";
+import Container from "../components/ui/Container";
 import { useCarrinho } from "../context/CarrinhoContext";
+import "../styles/carrinho.css";
 
-// URL base da API vinda do arquivo .env
-const API_URL = import.meta.env.VITE_API_URL;
+const VALOR_FRETE_GRATIS = 120;
 
-// Tipo usado para mensagem da tela
 type Mensagem = {
   texto: string;
+  tipo: "sucesso" | "erro";
 };
 
+const formatadorPreco = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+});
+
+function imagemProduto(nome: string, categoria = "") {
+  const texto = `${nome} ${categoria}`
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+  if (texto.includes("gummi") || texto.includes("comest")) {
+    return productGummies;
+  }
+
+  if (texto.includes("vape") || texto.includes("cartucho")) {
+    return productVape;
+  }
+
+  if (
+    texto.includes("pre-roll") ||
+    texto.includes("preroll") ||
+    texto.includes("bolado")
+  ) {
+    return productPrerolls;
+  }
+
+  if (texto.includes("resin") || texto.includes("concentr")) {
+    return productResin;
+  }
+
+  return productFlower;
+}
+
 function Carrinho() {
-  // Dados e funções do carrinho
+  const navigate = useNavigate();
   const {
     itens,
+    alterarQuantidade,
     removerProduto,
     limparCarrinho,
   } = useCarrinho();
 
-  // Controle da tela
   const [mensagem, setMensagem] = useState<Mensagem | null>(null);
-  const [finalizando, setFinalizando] = useState(false);
 
-  // Calcula o total do carrinho
-  const valorTotal = itens.reduce(
-    (total, item) =>
-      total + item.produto.preco * item.quantidade,
-    0
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
+  const quantidadeTotal = itens.reduce(
+    (total, item) => total + item.quantidade,
+    0,
   );
 
-  // Finaliza o pedido
-  async function finalizarPedido() {
+  const subtotal = itens.reduce(
+    (total, item) => total + item.produto.preco * item.quantidade,
+    0,
+  );
+
+  const faltaParaFrete = Math.max(VALOR_FRETE_GRATIS - subtotal, 0);
+  const progressoFrete = Math.min((subtotal / VALOR_FRETE_GRATIS) * 100, 100);
+
+  // Leva o usuário para preencher entrega e pagamento.
+  function irParaCheckout() {
     const token = localStorage.getItem("token");
 
-    // Verifica se o usuário está logado
     if (!token) {
       setMensagem({
         texto: "Você precisa fazer login para finalizar o pedido.",
+        tipo: "erro",
       });
       return;
     }
 
-    // Verifica se existem itens no carrinho
     if (itens.length === 0) {
-      setMensagem({
-        texto: "Seu carrinho está vazio.",
-      });
+      setMensagem({ texto: "Seu carrinho está vazio.", tipo: "erro" });
       return;
     }
 
-    // Todos os produtos precisam ser da mesma loja
     const primeiraLoja = itens[0].produto.loja?._id;
 
     if (!primeiraLoja) {
       setMensagem({
         texto: "Loja do produto não encontrada.",
+        tipo: "erro",
       });
       return;
     }
 
-    // Verifica se existe produto de outra loja
     const lojasDiferentes = itens.some(
-      (item) =>
-        item.produto.loja?._id !== primeiraLoja
+      (item) => item.produto.loja?._id !== primeiraLoja,
     );
 
     if (lojasDiferentes) {
       setMensagem({
-        texto:
-          "Os produtos do pedido precisam pertencer à mesma loja.",
+        texto: "Os produtos precisam pertencer à mesma loja.",
+        tipo: "erro",
       });
       return;
     }
 
-    // Ativa o estado de carregamento
-    setFinalizando(true);
     setMensagem(null);
-
-    try {
-      // Envia o pedido para a API
-      const resposta = await fetch(
-        `${API_URL}/api/pedidos`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            loja: primeiraLoja,
-
-            // Envia produto e quantidade
-            itens: itens.map((item) => ({
-              produto: item.produto._id,
-              quantidade: item.quantidade,
-            })),
-          }),
-        }
-      );
-
-      // Converte a resposta para JSON
-      const dados = await resposta.json();
-
-      // Verifica se ocorreu algum erro na API
-      if (!resposta.ok) {
-        setMensagem({
-          texto:
-            dados.mensagem ||
-            "Não foi possível criar o pedido.",
-        });
-        return;
-      }
-
-      // Limpa o carrinho após sucesso
-      limparCarrinho();
-
-      // Mostra mensagem de sucesso
-      setMensagem({
-        texto: "Pedido realizado com sucesso!",
-      });
-    } catch {
-      // Erro de conexão com o servidor
-      setMensagem({
-        texto: "Não foi possível conectar ao servidor.",
-      });
-    } finally {
-      // Finaliza o estado de carregamento
-      setFinalizando(false);
-    }
+    navigate("/checkout");
   }
 
   return (
-    <main>
-      <h1>Carrinho</h1>
+    <main className="ihemp-cart-page">
+      <Container>
+        <header className="cart-page__header">
+          <button type="button" onClick={() => navigate(-1)} aria-label="Voltar">
+            <ArrowLeft size={21} aria-hidden="true" />
+          </button>
 
-      {/* Mostra mensagem */}
-      {mensagem && <p>{mensagem.texto}</p>}
+          <div>
+            <span>Seu pedido</span>
+            <h1>Meu carrinho</h1>
+          </div>
 
-      {/* Carrinho vazio */}
-      {itens.length === 0 ? (
-        <p>Seu carrinho está vazio.</p>
-      ) : (
-        <>
-          {/* Lista os itens */}
-          {itens.map((item) => (
-            <div key={item.produto._id}>
-              <h2>{item.produto.nome}</h2>
+          {itens.length > 0 ? (
+            <button
+              className="cart-page__clear"
+              type="button"
+              onClick={limparCarrinho}
+            >
+              Limpar
+            </button>
+          ) : (
+            <span className="cart-page__header-space" />
+          )}
+        </header>
 
-              <p>
-                Loja:{" "}
-                {item.produto.loja?.nome ||
-                  "Loja não disponível"}
-              </p>
+        {mensagem && (
+          <p className={`cart-page__notice is-${mensagem.tipo}`} role="status">
+            {mensagem.texto}
+          </p>
+        )}
 
-              <p>
-                Quantidade: {item.quantidade}
-              </p>
-
-              <p>
-                Preço unitário: R${" "}
-                {item.produto.preco.toFixed(2)}
-              </p>
-
-              <p>
-                Subtotal: R${" "}
-                {(
-                  item.produto.preco *
-                  item.quantidade
-                ).toFixed(2)}
-              </p>
-
-              {/* Remove o produto */}
-              <button
-                onClick={() =>
-                  removerProduto(item.produto._id)
-                }
-              >
-                Remover
-              </button>
-
-              <hr />
+        {itens.length === 0 ? (
+          <Card className="cart-empty" variant="soft">
+            <div className="cart-empty__icon">
+              <ShoppingBag size={34} aria-hidden="true" />
             </div>
-          ))}
+            <h2>Seu carrinho está vazio</h2>
+            <p>Explore as lojas e encontre seus produtos favoritos.</p>
+            <Link to="/">Explorar produtos</Link>
+          </Card>
+        ) : (
+          <div className="cart-layout">
+            <section className="cart-main" aria-label="Itens do carrinho">
+              <Card className="cart-shipping" variant="soft">
+                <Truck size={22} aria-hidden="true" />
+                <div>
+                  {faltaParaFrete > 0 ? (
+                    <strong>
+                      Faltam {formatadorPreco.format(faltaParaFrete)} para ganhar frete grátis
+                    </strong>
+                  ) : (
+                    <strong>Você ganhou frete grátis!</strong>
+                  )}
 
-          {/* Mostra o valor total */}
-          <h2>
-            Total: R$ {valorTotal.toFixed(2)}
-          </h2>
+                  <div className="cart-shipping__bar" aria-hidden="true">
+                    <span style={{ width: `${progressoFrete}%` }} />
+                  </div>
 
-          {/* Finaliza o pedido */}
-          <button
-            onClick={finalizarPedido}
-            disabled={finalizando}
-          >
-            {finalizando
-              ? "Finalizando..."
-              : "Finalizar pedido"}
-          </button>
+                  <small>
+                    {formatadorPreco.format(subtotal)} / {formatadorPreco.format(VALOR_FRETE_GRATIS)}
+                  </small>
+                </div>
+              </Card>
 
-          {" "}
+              <div className="cart-store">
+                <Store size={19} aria-hidden="true" />
+                <span>Vendido por</span>
+                <strong>{itens[0].produto.loja?.nome}</strong>
+              </div>
 
-          {/* Limpa todo o carrinho */}
-          <button onClick={limparCarrinho}>
-            Limpar carrinho
-          </button>
-        </>
-      )}
+              <div className="cart-items">
+                {itens.map((item) => (
+                  <Card className="cart-item" key={item.produto._id} padding="none">
+                    <Link
+                      className="cart-item__image"
+                      to={`/produtos/${item.produto._id}`}
+                      aria-label={`Ver ${item.produto.nome}`}
+                    >
+                      <img
+                        src={imagemProduto(item.produto.nome, item.produto.categoria)}
+                        alt={item.produto.nome}
+                      />
+                    </Link>
+
+                    <div className="cart-item__content">
+                      <div>
+                        <span>{item.produto.categoria || "Produto IHEMP"}</span>
+                        <h2>{item.produto.nome}</h2>
+                        <small>{formatadorPreco.format(item.produto.preco)} cada</small>
+                      </div>
+
+                      <div className="cart-item__footer">
+                        <div className="cart-item__quantity" aria-label="Quantidade">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              alterarQuantidade(item.produto._id, item.quantidade - 1)
+                            }
+                            aria-label="Diminuir quantidade"
+                          >
+                            <Minus size={17} aria-hidden="true" />
+                          </button>
+                          <strong>{item.quantidade}</strong>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              alterarQuantidade(item.produto._id, item.quantidade + 1)
+                            }
+                            disabled={item.quantidade >= item.produto.estoque}
+                            aria-label="Aumentar quantidade"
+                          >
+                            <Plus size={17} aria-hidden="true" />
+                          </button>
+                        </div>
+
+                        <strong>
+                          {formatadorPreco.format(item.produto.preco * item.quantidade)}
+                        </strong>
+
+                        <button
+                          className="cart-item__remove"
+                          type="button"
+                          onClick={() => removerProduto(item.produto._id)}
+                          aria-label={`Remover ${item.produto.nome}`}
+                        >
+                          <Trash2 size={19} aria-hidden="true" />
+                        </button>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+
+              <Link className="cart-continue" to="/">
+                <ArrowLeft size={18} aria-hidden="true" />
+                Continuar comprando
+              </Link>
+            </section>
+
+            <aside className="cart-summary">
+              <Card className="cart-summary__card">
+                <span>Resumo do pedido</span>
+                <h2>{quantidadeTotal} {quantidadeTotal === 1 ? "item" : "itens"}</h2>
+
+                <dl>
+                  <div>
+                    <dt>Subtotal</dt>
+                    <dd>{formatadorPreco.format(subtotal)}</dd>
+                  </div>
+                  <div>
+                    <dt>Entrega</dt>
+                    <dd>{faltaParaFrete === 0 ? "Grátis" : "A calcular"}</dd>
+                  </div>
+                  <div>
+                    <dt>Desconto</dt>
+                    <dd>—</dd>
+                  </div>
+                </dl>
+
+                <div className="cart-summary__total">
+                  <span>Total</span>
+                  <strong>{formatadorPreco.format(subtotal)}</strong>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={irParaCheckout}
+                >
+                  Finalizar pedido
+                  <ChevronRight size={19} aria-hidden="true" />
+                </button>
+
+                <div className="cart-summary__safe">
+                  <ShieldCheck size={19} aria-hidden="true" />
+                  <span>Compra segura e dados protegidos</span>
+                </div>
+              </Card>
+
+              <Card className="cart-summary__delivery" variant="soft">
+                <PackageCheck size={22} aria-hidden="true" />
+                <div>
+                  <strong>Entrega discreta</strong>
+                  <span>Embalagem segura na sua porta</span>
+                </div>
+              </Card>
+            </aside>
+          </div>
+        )}
+      </Container>
     </main>
   );
 }
