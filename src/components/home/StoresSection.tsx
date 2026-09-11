@@ -118,7 +118,7 @@ function StoresSection() {
               <Link
                 className="home-store"
                 key={loja._id}
-                to={`/produtos?loja=${loja._id}`}
+                to={`/lojas/${loja._id}`}
               >
                 <Card padding="none" interactive>
                   <div className="home-store__cover">
